@@ -971,6 +971,7 @@ var Special = function (_BaseSpecial) {
       (0, _dom.removeChildren)(EL.tInner);
       EL.tInner.appendChild(EL.result);
 
+      EL.rImg.src = result.img;
       EL.rTitle.textContent = result.title;
       EL.rResult.textContent = this.correctAnswers + ' \u0438\u0437 ' + _data2.default.questions.length + ' \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u044B\u0445 \u043E\u0442\u0432\u0435\u0442\u043E\u0432:';
       EL.rDesc.textContent = result.description;
@@ -1104,6 +1105,7 @@ var Special = function (_BaseSpecial) {
       EL.a.appendChild(EL.aBody);
 
       EL.result = (0, _dom.makeElement)('div', CSS.main + '-result');
+      EL.rImg = (0, _dom.makeElement)('img', CSS.main + '-result__img');
       EL.rInner = (0, _dom.makeElement)('div', CSS.main + '-result__inner');
       EL.rTitle = (0, _dom.makeElement)('div', CSS.main + '-result__title');
       EL.rResult = (0, _dom.makeElement)('div', CSS.main + '-result__result');
@@ -1122,6 +1124,7 @@ var Special = function (_BaseSpecial) {
       EL.rInner.appendChild(EL.rShare);
       EL.rInner.appendChild(EL.rRestart);
 
+      EL.result.appendChild(EL.rImg);
       EL.result.appendChild(EL.rInner);
 
       EL.mInner.appendChild(EL.enter);
@@ -2583,15 +2586,18 @@ exports.default = {
   results: [{
     range: [0, 3],
     title: 'Иван Данко',
-    description: 'Железный занавес давно убрали. Срочно смотрите боевики 80-х!'
+    description: 'Железный занавес давно убрали. Срочно смотрите боевики 80-х!',
+    img: 'https://leonardo.osnova.io/6d12a7de-1320-0134-57b3-6485bf1ab6ec/'
   }, {
     range: [4, 6],
     title: 'Рэмбо',
-    description: 'Блуждания по джунглям не прошли без последствий, но ваши познания боевиков 80-х всё равно впечатляют.'
+    description: 'Блуждания по джунглям не прошли без последствий, но ваши познания боевиков 80-х всё равно впечатляют.',
+    img: 'https://leonardo.osnova.io/db62ad0a-cf75-4194-b776-5745a8902d25/'
   }, {
     range: [7, 10],
     title: 'Джон Коннор',
-    description: 'Если существование человечества будет зависеть от знания боевиков 80-х, вы его спасёте.'
+    description: 'Если существование человечества будет зависеть от знания боевиков 80-х, вы его спасёте.',
+    img: 'https://leonardo.osnova.io/bffc1a67-bb27-b4d8-2194-533f13c64e6d/'
   }]
 };
 
