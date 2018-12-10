@@ -898,9 +898,7 @@ var Special = function (_BaseSpecial) {
 
       this.setInitialParams();
 
-      EL.mInner.replaceChild(EL.test, EL.result);
-
-      EL.aBtn.innerHTML = 'Продолжить';
+      EL.aBtn.innerHTML = '<span>\u041F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C</span>' + _svg2.default.arrow;
       EL.aBtn.dataset.click = 'continue';
 
       this.makeNextQuestion();
@@ -957,7 +955,7 @@ var Special = function (_BaseSpecial) {
       }
 
       if (this.activeIndex === _data2.default.questions.length - 1) {
-        EL.aBtn.innerHTML = 'Результат';
+        EL.aBtn.innerHTML = '<span>\u0420\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442</span>' + _svg2.default.arrow;
         EL.aBtn.dataset.click = 'result';
       }
     }
@@ -966,9 +964,12 @@ var Special = function (_BaseSpecial) {
     value: function result() {
       Analytics.sendEvent('Result');
 
+      EL.main.classList.remove('is-answered');
+
       var result = Special.getResult(this.correctAnswers);
 
-      EL.mInner.replaceChild(EL.result, EL.test);
+      (0, _dom.removeChildren)(EL.tInner);
+      EL.tInner.appendChild(EL.result);
 
       EL.rTitle.textContent = result.title;
       EL.rResult.textContent = this.correctAnswers + ' \u0438\u0437 ' + _data2.default.questions.length + ' \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u044B\u0445 \u043E\u0442\u0432\u0435\u0442\u043E\u0432:';
@@ -1031,13 +1032,6 @@ var Special = function (_BaseSpecial) {
           IMAGES.push(incorrect);
         }
       });
-
-      // for(const i in Data.movies) {
-      //   if (Data.movies.hasOwnProperty(i)) {
-      //     const tape = document.createElement('img');
-      //     tape.src = Data.movies[i].tape;
-      //   }
-      // }
     }
   }, {
     key: 'createElements',
@@ -1050,24 +1044,34 @@ var Special = function (_BaseSpecial) {
       EL.main.appendChild(EL.mInner);
 
       EL.enter = (0, _dom.makeElement)('div', CSS.main + '-enter');
-      EL.eImg = (0, _dom.makeElement)('img', CSS.main + '-enter__img');
+      EL.eLogo = (0, _dom.makeElement)('img', CSS.main + '-enter__logo', {
+        src: 'https://leonardo.osnova.io/4b5e6c9a-06b0-58f6-131e-0767b9e2c566/'
+      });
       EL.eText = (0, _dom.makeElement)('div', CSS.main + '-enter__text', {
         textContent: _data2.default.description
       });
       EL.eBtn = (0, _dom.makeElement)('button', CSS.main + '-enter__btn', {
-        innerHTML: 'Play',
+        innerHTML: '<span>Play</span>' + _svg2.default.arrow,
         data: {
           click: 'start'
         }
       });
 
-      EL.enter.appendChild(EL.eImg);
+      EL.enter.appendChild(EL.eLogo);
       EL.enter.appendChild(EL.eText);
       EL.enter.appendChild(EL.eBtn);
 
       EL.test = (0, _dom.makeElement)('div', CSS.main + '-test');
+      EL.tLogo = (0, _dom.makeElement)('img', CSS.main + '-test__logo', {
+        src: 'https://leonardo.osnova.io/4b5e6c9a-06b0-58f6-131e-0767b9e2c566/'
+      });
+      EL.tFrame = (0, _dom.makeElement)('img', CSS.main + '-test__frame', {
+        src: 'https://leonardo.osnova.io/29c5f5ae-ab14-b6c3-968e-931d8619b008/'
+      });
       EL.tInner = (0, _dom.makeElement)('div', CSS.main + '-test__inner');
 
+      EL.test.appendChild(EL.tLogo);
+      EL.test.appendChild(EL.tFrame);
       EL.test.appendChild(EL.tInner);
 
       EL.q = (0, _dom.makeElement)('div', CSS.main + '-q');
@@ -1087,7 +1091,7 @@ var Special = function (_BaseSpecial) {
       EL.aBody = (0, _dom.makeElement)('div', CSS.main + '-a__body');
       EL.aText = (0, _dom.makeElement)('div', CSS.main + '-a__text');
       EL.aBtn = (0, _dom.makeElement)('button', CSS.main + '-a__btn', {
-        innerHTML: 'Продолжить',
+        innerHTML: '<span>\u041F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C</span>' + _svg2.default.arrow,
         data: {
           click: 'continue'
         }
@@ -2243,7 +2247,7 @@ exports.default = {
       cover: 'https://leonardo.osnova.io/49272938-5b5f-b2f3-9551-bcf53853bd14/',
       bg: {
         correct: 'https://leonardo.osnova.io/e2d7ef43-e798-dde8-72a0-6f5a4d91aebd/',
-        incorrect: ''
+        incorrect: 'https://leonardo.osnova.io/fcc076bf-7d8c-f48c-b16e-ede61198e2f5/'
       }
     },
     k9: {
@@ -2405,6 +2409,14 @@ exports.default = {
         correct: 'https://leonardo.osnova.io/3c3de587-0fff-3bdf-2dca-d057e7ab8566/',
         incorrect: ''
       }
+    },
+    rambo3: {
+      tape: 'https://leonardo.osnova.io/8b364c5f-1611-a910-b90b-9cec6bfef44b/',
+      cover: 'https://leonardo.osnova.io/70228928-a310-54df-3c89-eee00f1cd71c/',
+      bg: {
+        correct: '',
+        incorrect: 'https://leonardo.osnova.io/b7f42ea7-f93b-5487-218d-372e884c2ba9/'
+      }
     }
   },
   questions: [{
@@ -2525,7 +2537,7 @@ exports.default = {
       id: 'mad_max_3',
       answer: 'Ружьё у Макса действительно было, правда без патронов. А вот Эш в «Зловещих мертвецах» вовсю крошил чудовищ.'
     }, {
-      id: 'first_blood',
+      id: 'rambo3',
       answer: 'Рэмбо скорее сказал бы про пулемёт, но вот у Эша в «Зловещих мертвецах» и правда были только ружьё и бензопила.'
     }, {
       id: 'evil_dead',
@@ -2593,12 +2605,8 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-/**
- * Все svg-иконки рекомендуется хранить здесь,
- * предварительно прогнав их через https://jakearchibald.github.io/svgomg/
- */
 exports.default = {
-  demo: '<svg width="19" height="18" xmlns="http://www.w3.org/2000/svg"><path d="M17.675 1.282c-.306-.127-.567-.075-.783.156L15.44 2.881a8.682 8.682 0 0 0-2.734-1.75A8.427 8.427 0 0 0 9.524.51a8.352 8.352 0 0 0-3.333.681 8.66 8.66 0 0 0-2.74 1.834 8.67 8.67 0 0 0-1.833 2.74 8.35 8.35 0 0 0-.682 3.332c0 1.162.227 2.273.682 3.332a8.673 8.673 0 0 0 1.834 2.739 8.672 8.672 0 0 0 2.74 1.833 8.352 8.352 0 0 0 3.332.683c1.281 0 2.5-.27 3.656-.811a8.383 8.383 0 0 0 2.951-2.287.364.364 0 0 0 .084-.251.309.309 0 0 0-.106-.23l-1.531-1.542a.43.43 0 0 0-.28-.101c-.12.015-.205.06-.257.135a5.61 5.61 0 0 1-2.002 1.643 5.64 5.64 0 0 1-2.515.581 5.57 5.57 0 0 1-2.22-.453 5.752 5.752 0 0 1-1.828-1.224 5.777 5.777 0 0 1-1.224-1.828 5.568 5.568 0 0 1-.453-2.22c0-.775.151-1.514.453-2.219A5.756 5.756 0 0 1 5.476 5.05a5.76 5.76 0 0 1 1.828-1.224 5.57 5.57 0 0 1 2.22-.453c1.498 0 2.799.51 3.902 1.532l-1.544 1.543c-.23.223-.283.48-.156.77.127.299.347.448.66.448h5.01a.69.69 0 0 0 .503-.212.688.688 0 0 0 .211-.503V1.94c0-.312-.144-.532-.435-.66z" fill="#909090" fill-rule="evenodd"/></svg>'
+  arrow: '<svg viewBox="0 0 70 70"><path fill="#fff" d="M52.1 30.2v-6.3h-7.2v-7h-7.3v-5.6h-7.2V6.6h-7.2v-5h-7.3v67.5h7.3v-5h7.2v-4.6h7.2v-5.6h7.3v-7.1h7.2v-6.2h7.2V30.2z"/></svg>'
 };
 
 /***/ })
