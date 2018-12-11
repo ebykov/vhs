@@ -107,6 +107,7 @@
   margin: 40px auto 0;
   color: #fff;
   font-size: 24px;
+  line-height: 1;
   text-transform: uppercase;
   border: 3px solid #1f6bcc;
   background-color: transparent;
@@ -364,6 +365,7 @@
   margin-top: 20px;
   color: #fff;
   font-size: 12px;
+  line-height: 1;
   text-transform: uppercase;
   border: 1px solid #7e7e7e;
   background-color: transparent;
@@ -450,6 +452,7 @@
   margin-top: 40px;
   color: #fff;
   font-size: 20px;
+  line-height: 1;
   text-transform: uppercase;
   cursor: pointer;
 }
