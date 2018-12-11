@@ -1112,7 +1112,7 @@ var Special = function (_BaseSpecial) {
       EL.rDesc = (0, _dom.makeElement)('div', CSS.main + '-result__description');
       EL.rShare = (0, _dom.makeElement)('div', CSS.main + '-result__share');
       EL.rRestart = (0, _dom.makeElement)('div', CSS.main + '-result__restart', {
-        innerHTML: 'Пройти еще раз',
+        innerHTML: '<span>\u041F\u0440\u043E\u0439\u0442\u0438 \u0435\u0449\u0435 \u0440\u0430\u0437</span>' + _svg2.default.refresh,
         data: {
           click: 'restart'
         }
@@ -2612,7 +2612,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = {
-  arrow: '<svg viewBox="0 0 70 70"><path fill="#fff" d="M52.1 30.2v-6.3h-7.2v-7h-7.3v-5.6h-7.2V6.6h-7.2v-5h-7.3v67.5h7.3v-5h7.2v-4.6h7.2v-5.6h7.3v-7.1h7.2v-6.2h7.2V30.2z"/></svg>'
+  arrow: '<svg viewBox="0 0 70 70"><path fill="#fff" d="M52.1 30.2v-6.3h-7.2v-7h-7.3v-5.6h-7.2V6.6h-7.2v-5h-7.3v67.5h7.3v-5h7.2v-4.6h7.2v-5.6h7.3v-7.1h7.2v-6.2h7.2V30.2z"/></svg>',
+  refresh: '<svg viewBox="0 0 61.3 54"><path fill="#fff" d="M11.4 48.3h27V54h-27zM11.4 0h27v5.7h-27z"/><path fill="#fff" d="M5.7 42.6h5.7v5.7H5.7zM5.7 5.7h5.7v5.7H5.7zM38.4 5.7h5.7v5.7h-5.7zM49.9 32.7v5.1h-5.7v-5.1h-5.8V27h5.8V11.4h5.7V27h5.7v5.7h-5.7z"/><path fill="#fff" d="M32.7 21.3h5.7V27h-5.7zM55.6 21.3h5.7V27h-5.7zM0 11.4h5.7v31.1H0z"/></svg>'
 };
 
 /***/ })
