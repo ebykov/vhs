@@ -898,6 +898,8 @@ var Special = function (_BaseSpecial) {
 
       this.setInitialParams();
 
+      EL.main.classList.remove('is-result');
+
       EL.aBtn.innerHTML = '<span>\u041F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C</span>' + _svg2.default.arrow;
       EL.aBtn.dataset.click = 'continue';
 
@@ -965,6 +967,7 @@ var Special = function (_BaseSpecial) {
       Analytics.sendEvent('Result');
 
       EL.main.classList.remove('is-answered');
+      EL.main.classList.add('is-result');
 
       var result = Special.getResult(this.correctAnswers);
 
