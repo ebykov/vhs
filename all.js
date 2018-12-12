@@ -1001,7 +1001,7 @@ var Special = function (_BaseSpecial) {
         this.container.classList.add('is-feed');
       }
 
-      Special.loadImages();
+      // Special.loadImages();
       Special.createElements();
 
       this.container.appendChild(EL.main);
