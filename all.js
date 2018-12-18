@@ -936,6 +936,7 @@ var Special = function (_BaseSpecial) {
       Analytics.sendEvent('Option - ' + (this.activeIndex + 1));
 
       var index = el.dataset.index;
+
       var q = _data2.default.questions[this.activeIndex];
       var option = q.options[index];
       var movie = _data2.default.movies[option.id];
@@ -945,14 +946,19 @@ var Special = function (_BaseSpecial) {
       (0, _dom.removeChildren)(EL.tInner);
       EL.tInner.appendChild(EL.a);
 
-      EL.aImg.src = movie.cover;
       EL.aText.innerHTML = option.answer;
 
       if (q.options[index].isCorrect) {
         this.correctAnswers += 1;
 
+        EL.aImg.src = movie.cover;
+        EL.a.classList.remove('is-incorrect');
+        EL.a.classList.add('is-correct');
         EL.a.style.backgroundImage = 'url(' + movie.bg.correct + ')';
       } else {
+        EL.aImg.src = movie.coverR;
+        EL.a.classList.remove('is-correct');
+        EL.a.classList.add('is-incorrect');
         EL.a.style.backgroundImage = 'url(' + movie.bg.incorrect + ')';
       }
 
@@ -975,6 +981,7 @@ var Special = function (_BaseSpecial) {
       EL.tInner.appendChild(EL.result);
 
       EL.rImg.src = result.img;
+      EL.rImgM.src = result.imgM;
       EL.rTitle.textContent = result.title;
       EL.rResult.textContent = this.correctAnswers + ' \u0438\u0437 ' + _data2.default.questions.length + ' \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u044B\u0445 \u043E\u0442\u0432\u0435\u0442\u043E\u0432:';
       EL.rDesc.textContent = result.description;
@@ -1050,6 +1057,7 @@ var Special = function (_BaseSpecial) {
       EL.enter = (0, _dom.makeElement)('div', CSS.main + '-enter');
       EL.eLogo = (0, _dom.makeElement)('img', CSS.main + '-enter__logo', {
         src: 'https://leonardo.osnova.io/4b5e6c9a-06b0-58f6-131e-0767b9e2c566/'
+        // src: 'images/logo.png',
       });
       EL.eText = (0, _dom.makeElement)('div', CSS.main + '-enter__text', {
         textContent: _data2.default.description
@@ -1068,9 +1076,11 @@ var Special = function (_BaseSpecial) {
       EL.test = (0, _dom.makeElement)('div', CSS.main + '-test');
       EL.tLogo = (0, _dom.makeElement)('img', CSS.main + '-test__logo', {
         src: 'https://leonardo.osnova.io/4b5e6c9a-06b0-58f6-131e-0767b9e2c566/'
+        // src: 'images/logo.png',
       });
       EL.tFrame = (0, _dom.makeElement)('img', CSS.main + '-test__frame', {
         src: 'https://leonardo.osnova.io/29c5f5ae-ab14-b6c3-968e-931d8619b008/'
+        // src: 'images/frame.png',
       });
       EL.tInner = (0, _dom.makeElement)('div', CSS.main + '-test__inner');
 
@@ -1109,10 +1119,12 @@ var Special = function (_BaseSpecial) {
 
       EL.result = (0, _dom.makeElement)('div', CSS.main + '-result');
       EL.rImg = (0, _dom.makeElement)('img', CSS.main + '-result__img');
+      EL.rImgM = (0, _dom.makeElement)('img', CSS.main + '-result__img-m');
       EL.rInner = (0, _dom.makeElement)('div', CSS.main + '-result__inner');
       EL.rTitle = (0, _dom.makeElement)('div', CSS.main + '-result__title');
       EL.rResult = (0, _dom.makeElement)('div', CSS.main + '-result__result');
       EL.rDesc = (0, _dom.makeElement)('div', CSS.main + '-result__description');
+      EL.rBottom = (0, _dom.makeElement)('div', CSS.main + '-result__bottom');
       EL.rShare = (0, _dom.makeElement)('div', CSS.main + '-result__share');
       EL.rRestart = (0, _dom.makeElement)('div', CSS.main + '-result__restart', {
         innerHTML: '<span>\u041F\u0440\u043E\u0439\u0442\u0438 \u0435\u0449\u0435 \u0440\u0430\u0437</span>' + _svg2.default.refresh,
@@ -1121,13 +1133,16 @@ var Special = function (_BaseSpecial) {
         }
       });
 
+      EL.rBottom.appendChild(EL.rShare);
+      EL.rBottom.appendChild(EL.rRestart);
+
       EL.rInner.appendChild(EL.rTitle);
       EL.rInner.appendChild(EL.rResult);
       EL.rInner.appendChild(EL.rDesc);
-      EL.rInner.appendChild(EL.rShare);
-      EL.rInner.appendChild(EL.rRestart);
+      EL.rInner.appendChild(EL.rBottom);
 
       EL.result.appendChild(EL.rImg);
+      EL.result.appendChild(EL.rImgM);
       EL.result.appendChild(EL.rInner);
 
       EL.mInner.appendChild(EL.enter);
@@ -2211,6 +2226,7 @@ exports.default = {
     red_heat: {
       tape: 'https://leonardo.osnova.io/8b339269-836c-622d-16ea-1c289fa47362/',
       cover: 'https://leonardo.osnova.io/656124b8-7864-31a9-16cb-a3efacc9ea50/',
+      coverR: 'https://leonardo.osnova.io/79defe18-f68c-edd0-5008-acf012877070/',
       bg: {
         correct: '',
         incorrect: 'https://leonardo.osnova.io/9e908fa8-9178-fbe7-89e1-c237cc2c5719/'
@@ -2219,6 +2235,7 @@ exports.default = {
     running_man: {
       tape: 'https://leonardo.osnova.io/aaa1f323-f6c2-cf71-5339-bcf4d44fbe3e/',
       cover: 'https://leonardo.osnova.io/945b64b1-cc75-dd3a-1ff0-ae72cba1ac5c/',
+      coverR: 'https://leonardo.osnova.io/39bdc089-6045-e870-b4bc-bb5bbdcf81c9/',
       bg: {
         correct: '',
         incorrect: 'https://leonardo.osnova.io/62464b6e-a0d9-e826-32a3-8e832f69f3f1/'
@@ -2227,6 +2244,7 @@ exports.default = {
     commando: {
       tape: 'https://leonardo.osnova.io/0062882e-335d-57ad-6fb9-2f2dfe289675/',
       cover: 'https://leonardo.osnova.io/5454c1dc-ba81-9c1c-ceee-4d2c1a6385db/',
+      coverR: 'https://leonardo.osnova.io/9d162ca3-6d86-5a14-3468-bbc2330efb20/',
       bg: {
         correct: 'https://leonardo.osnova.io/7cff4327-3b8f-e45e-aa81-ef37796dc14c/',
         incorrect: 'https://leonardo.osnova.io/b60ae54e-1c21-bed4-e06d-e99c6a76ddd5/'
@@ -2235,6 +2253,7 @@ exports.default = {
     terminator: {
       tape: 'https://leonardo.osnova.io/86aec6d6-211f-acc3-9431-04def1c6156f/',
       cover: 'https://leonardo.osnova.io/8455af91-ca72-8ade-e54f-e034cd897773/',
+      coverR: 'https://leonardo.osnova.io/ee381c73-14ff-f821-bd8c-af83c87a1806/',
       bg: {
         correct: '',
         incorrect: 'https://leonardo.osnova.io/3c9e6f67-7256-b7d3-07d0-07efc7128a0d/'
@@ -2243,6 +2262,7 @@ exports.default = {
     lethal_weapon: {
       tape: 'https://leonardo.osnova.io/ab5c53ef-57f5-85ec-3c74-031d61dbabbd/',
       cover: 'https://leonardo.osnova.io/be1637be-66c3-8d25-ec8b-d39e8a460c50/',
+      coverR: 'https://leonardo.osnova.io/13391aec-a89d-87cd-83ec-812aff49065f/',
       bg: {
         correct: 'https://leonardo.osnova.io/7bc26045-3263-5f9b-d522-c690f6d7d30c/',
         incorrect: 'https://leonardo.osnova.io/3cc11d13-ecb9-44db-5b64-0f2e9ebfce17/'
@@ -2251,6 +2271,7 @@ exports.default = {
     die_hard: {
       tape: 'https://leonardo.osnova.io/3d7dd616-7999-352e-f074-929977e25f73/',
       cover: 'https://leonardo.osnova.io/49272938-5b5f-b2f3-9551-bcf53853bd14/',
+      coverR: 'https://leonardo.osnova.io/cf346f12-8865-29f9-3aea-3ca8169267c8/',
       bg: {
         correct: 'https://leonardo.osnova.io/e2d7ef43-e798-dde8-72a0-6f5a4d91aebd/',
         incorrect: 'https://leonardo.osnova.io/fcc076bf-7d8c-f48c-b16e-ede61198e2f5/'
@@ -2259,6 +2280,7 @@ exports.default = {
     k9: {
       tape: 'https://leonardo.osnova.io/43a87a72-8136-6510-d9e2-72be51777065/',
       cover: 'https://leonardo.osnova.io/fa4a409d-e420-54cc-8de8-b3d711b1b284/',
+      coverR: 'https://leonardo.osnova.io/28a4e1a8-90e7-ed4b-f657-188f3e613bce/',
       bg: {
         correct: '',
         incorrect: 'https://leonardo.osnova.io/1780dc18-735a-68ba-713f-5e77d4d08358/'
@@ -2267,6 +2289,7 @@ exports.default = {
     cobra: {
       tape: 'https://leonardo.osnova.io/4e6dab48-589a-debf-0f68-10e038673821/',
       cover: 'https://leonardo.osnova.io/eb4615b2-fb81-8f58-f434-f30ec49fda1a/',
+      coverR: 'https://leonardo.osnova.io/880c06e5-0116-f607-6a26-5642de86bef6/',
       bg: {
         correct: '',
         incorrect: 'https://leonardo.osnova.io/09018272-900e-58f1-93b3-9a845790da8d/'
@@ -2275,6 +2298,7 @@ exports.default = {
     first_blood: {
       tape: 'https://leonardo.osnova.io/902eefdb-fa53-b838-db1c-6e1b179fa93a/',
       cover: 'https://leonardo.osnova.io/10cdabd6-57b7-fa1b-ce26-d3183bbe1ec0/',
+      coverR: 'https://leonardo.osnova.io/669f3458-b93a-affe-c960-1e11b32d1883/',
       bg: {
         correct: 'https://leonardo.osnova.io/4d6b876a-902b-3dd1-7671-b72b803602c2/',
         incorrect: 'https://leonardo.osnova.io/36adab81-aebe-7370-942d-1b5bfcbf3f2d/'
@@ -2283,6 +2307,7 @@ exports.default = {
     '48_hrs': {
       tape: 'https://leonardo.osnova.io/c2857133-62d1-cd2f-3465-1eb7a0d8eef0/',
       cover: 'https://leonardo.osnova.io/0d64acfb-dd25-e5e6-18f3-408ae74d5836/',
+      coverR: 'https://leonardo.osnova.io/8fcf79bd-11d6-ac4a-47d7-c346666e00b4/',
       bg: {
         correct: '',
         incorrect: 'https://leonardo.osnova.io/622315c1-4007-1a90-58ea-2799df5c2c34/'
@@ -2291,6 +2316,7 @@ exports.default = {
     terminator_2: {
       tape: 'https://leonardo.osnova.io/e148e85c-1208-0dca-97c5-e12d87134e2f/',
       cover: 'https://leonardo.osnova.io/1b8d07f5-140c-1143-40f2-8de0658da158/',
+      coverR: 'https://leonardo.osnova.io/b7c433f3-fbc2-2fa4-d108-04885173b123/',
       bg: {
         correct: '',
         incorrect: 'https://leonardo.osnova.io/b1ba40a4-be5b-5b59-928f-79a761b1c902/'
@@ -2299,6 +2325,7 @@ exports.default = {
     blade_runner: {
       tape: 'https://leonardo.osnova.io/a6fabac0-0c19-dfe3-8135-96061dee4bc8/',
       cover: 'https://leonardo.osnova.io/22bbd04a-664e-dd20-e011-1313eed0b1f0/',
+      coverR: 'https://leonardo.osnova.io/ec0d6742-a479-8cd8-6ae6-67f49e6c68a5/',
       bg: {
         correct: '',
         incorrect: 'https://leonardo.osnova.io/58b7ebfe-e79b-704d-431c-24daeea890e9/'
@@ -2307,6 +2334,7 @@ exports.default = {
     robocop: {
       tape: 'https://leonardo.osnova.io/0403b917-a0d4-f0eb-f836-335fa9a00627/',
       cover: 'https://leonardo.osnova.io/6fd37902-83d0-ba11-db59-0c154e34d09f/',
+      coverR: '',
       bg: {
         correct: 'https://leonardo.osnova.io/a7662767-693f-ac1b-7844-9d4414bd48fe/',
         incorrect: ''
@@ -2315,6 +2343,7 @@ exports.default = {
     rocky_3: {
       tape: 'https://leonardo.osnova.io/7ebd6a7e-2300-e229-ef2c-dd8d54b73326/',
       cover: 'https://leonardo.osnova.io/0d152d5a-9f9b-4d16-0e2a-b259028b1aa9/',
+      coverR: '',
       bg: {
         correct: '',
         incorrect: 'https://leonardo.osnova.io/43f03579-9465-d38d-1f26-e3f49b864bd5/'
@@ -2323,6 +2352,7 @@ exports.default = {
     back_to_future_2: {
       tape: 'https://leonardo.osnova.io/47b9526d-e737-b2e8-d41c-fdcf6dd5a3e9/',
       cover: 'https://leonardo.osnova.io/1f275e1a-8763-dce4-0d80-9cde9d784525/',
+      coverR: '',
       bg: {
         correct: '',
         incorrect: 'https://leonardo.osnova.io/e1020d06-f819-cfc9-b954-8552a18806dc/'
@@ -2331,6 +2361,7 @@ exports.default = {
     they_live: {
       tape: 'https://leonardo.osnova.io/04084358-f345-f3b4-546d-6c874367f98d/',
       cover: 'https://leonardo.osnova.io/a835e768-6c5e-6758-32ff-a695d5b2e698/',
+      coverR: '',
       bg: {
         correct: 'https://leonardo.osnova.io/13b94a65-7d93-3dc2-f8bb-81b68093a5c3/',
         incorrect: ''
@@ -2339,6 +2370,7 @@ exports.default = {
     thing: {
       tape: 'https://leonardo.osnova.io/5a0fbf62-acc2-f129-94ff-a5bb4dd6f0a6/',
       cover: 'https://leonardo.osnova.io/92603f72-c876-4729-3275-0931902fd8f9/',
+      coverR: 'https://leonardo.osnova.io/1ba865e1-2363-886c-84b0-18641f2a58bd/',
       bg: {
         correct: '',
         incorrect: 'https://leonardo.osnova.io/a2d9c1dc-06dd-53b3-e5c4-ca5dc31c10da/'
@@ -2347,6 +2379,7 @@ exports.default = {
     escape_from_ny: {
       tape: 'https://leonardo.osnova.io/07ef9501-0502-2ed4-f914-32e3abf8afbc/',
       cover: 'https://leonardo.osnova.io/2d1d998e-c14e-3563-f566-3fdc44ada8a9/',
+      coverR: 'https://leonardo.osnova.io/ded24c52-1795-d1cc-e4c6-3c19adea0b3f/',
       bg: {
         correct: '',
         incorrect: 'https://leonardo.osnova.io/6fcefbe5-e7b9-e675-0774-04868d17e9e5/'
@@ -2355,6 +2388,7 @@ exports.default = {
     batman: {
       tape: 'https://leonardo.osnova.io/025e83d5-0d28-e019-90a8-1bcffb2418af/',
       cover: 'https://leonardo.osnova.io/52d9322d-98b4-0b4f-3799-4ea215570244/',
+      coverR: '',
       bg: {
         correct: 'https://leonardo.osnova.io/661bb51d-09a2-dfcc-c104-c5a6a6a1e0cc/',
         incorrect: ''
@@ -2363,6 +2397,7 @@ exports.default = {
     tango_and_cash: {
       tape: 'https://leonardo.osnova.io/5771d95e-80d1-c710-2385-ddd2c4b6c680/',
       cover: 'https://leonardo.osnova.io/5e101a9e-dac3-0821-fa0f-8312307612b9/',
+      coverR: '',
       bg: {
         correct: '',
         incorrect: 'https://leonardo.osnova.io/30b14208-1e8e-b886-10a8-e7a02f6eb17c/'
@@ -2371,6 +2406,7 @@ exports.default = {
     mad_max_3: {
       tape: 'https://leonardo.osnova.io/aafaea75-2acd-11d8-02eb-0110f65b0fe3/',
       cover: 'https://leonardo.osnova.io/03a0d80e-4b0d-f32e-0dfa-7eca8fc3aa64/',
+      coverR: 'https://leonardo.osnova.io/9494bfac-aab6-ad51-ff9f-de258f0e9593/',
       bg: {
         correct: '',
         incorrect: 'https://leonardo.osnova.io/07db79ac-9679-ceba-a49b-09d47a590601/'
@@ -2379,6 +2415,7 @@ exports.default = {
     evil_dead: {
       tape: 'https://leonardo.osnova.io/44f3f78f-e411-95c8-4886-ac519dae3c0d/',
       cover: 'https://leonardo.osnova.io/e0789dc3-2b02-7484-0674-736d9c930f5a/',
+      coverR: '',
       bg: {
         correct: 'https://leonardo.osnova.io/8ad3b094-3dc7-a643-52e9-7dd4c971d426/',
         incorrect: ''
@@ -2387,6 +2424,7 @@ exports.default = {
     aliens: {
       tape: 'https://leonardo.osnova.io/3432f569-5954-7bee-9402-f30c0674ce67/',
       cover: 'https://leonardo.osnova.io/e5de84c0-e5b3-26fc-2783-4b3733823fe8/',
+      coverR: '',
       bg: {
         correct: 'https://leonardo.osnova.io/b8baffdd-5850-6fd9-3d64-b7cc6388d38c/',
         incorrect: ''
@@ -2395,6 +2433,7 @@ exports.default = {
     predator: {
       tape: 'https://leonardo.osnova.io/3b9a6d85-e1e2-61ae-c869-ae51c5664e32/',
       cover: 'https://leonardo.osnova.io/83537698-4ffd-e1f7-adbd-72f003196ae6/',
+      coverR: 'https://leonardo.osnova.io/76731b25-1dbd-2abd-c017-a6fd5138e09b/',
       bg: {
         correct: '',
         incorrect: 'https://leonardo.osnova.io/a35c6457-4a17-dd35-90b0-654f7377825d/'
@@ -2403,6 +2442,7 @@ exports.default = {
     star_wars_5: {
       tape: 'https://leonardo.osnova.io/a9955d7f-33ee-1018-b086-00690490a320/',
       cover: 'https://leonardo.osnova.io/0460928a-cbcc-8c76-5e1f-f5888fa38897/',
+      coverR: 'https://leonardo.osnova.io/48bc7fb2-63bc-812b-16e3-51afd7888039/',
       bg: {
         correct: '',
         incorrect: 'https://leonardo.osnova.io/baaee56b-3dac-a998-2a4c-20bfb287959a/'
@@ -2411,6 +2451,7 @@ exports.default = {
     highlander: {
       tape: 'https://leonardo.osnova.io/8fbdabfe-d2e3-1c88-c1e7-74bb95c3efcb/',
       cover: 'https://leonardo.osnova.io/a5a504b4-bbb0-c422-4bef-16e581efc4a1/',
+      coverR: '',
       bg: {
         correct: 'https://leonardo.osnova.io/3c3de587-0fff-3bdf-2dca-d057e7ab8566/',
         incorrect: ''
@@ -2419,6 +2460,7 @@ exports.default = {
     rambo3: {
       tape: 'https://leonardo.osnova.io/8b364c5f-1611-a910-b90b-9cec6bfef44b/',
       cover: 'https://leonardo.osnova.io/70228928-a310-54df-3c89-eee00f1cd71c/',
+      coverR: '',
       bg: {
         correct: '',
         incorrect: 'https://leonardo.osnova.io/b7f42ea7-f93b-5487-218d-372e884c2ba9/'
@@ -2590,17 +2632,20 @@ exports.default = {
     range: [0, 3],
     title: 'Иван Данко',
     description: 'Железный занавес давно убрали. Срочно смотрите боевики 80-х!',
-    img: 'https://leonardo.osnova.io/6d12a7de-1320-0134-57b3-6485bf1ab6ec/'
+    img: 'https://leonardo.osnova.io/6d12a7de-1320-0134-57b3-6485bf1ab6ec/',
+    imgM: 'https://leonardo.osnova.io/a8b31032-8c2f-5002-2a14-1a5cf70d1ee2/'
   }, {
     range: [4, 6],
     title: 'Рэмбо',
     description: 'Блуждания по джунглям не прошли без последствий, но ваши познания боевиков 80-х всё равно впечатляют.',
-    img: 'https://leonardo.osnova.io/db62ad0a-cf75-4194-b776-5745a8902d25/'
+    img: 'https://leonardo.osnova.io/db62ad0a-cf75-4194-b776-5745a8902d25/',
+    imgM: 'https://leonardo.osnova.io/dd461d49-9596-0341-d566-d2987a398133/'
   }, {
     range: [7, 10],
     title: 'Джон Коннор',
     description: 'Если существование человечества будет зависеть от знания боевиков 80-х, вы его спасёте.',
-    img: 'https://leonardo.osnova.io/bffc1a67-bb27-b4d8-2194-533f13c64e6d/'
+    img: 'https://leonardo.osnova.io/bffc1a67-bb27-b4d8-2194-533f13c64e6d/',
+    imgM: 'https://leonardo.osnova.io/ab2b1080-14c5-24d9-ed55-a72c4bbeff55/'
   }]
 };
 
