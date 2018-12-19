@@ -789,8 +789,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 __webpack_require__(10);
@@ -833,7 +831,7 @@ var CSS = {
 
 var EL = {};
 
-var IMAGES = [];
+var IMAGES = {};
 
 var Special = function (_BaseSpecial) {
   _inherits(Special, _BaseSpecial);
@@ -861,6 +859,30 @@ var Special = function (_BaseSpecial) {
     }
     return _this;
   }
+
+  // static loadImages() {
+  //   Object.entries(Data.movies).forEach(([key, value]) => {
+  //     const tape = document.createElement('img');
+  //     tape.src = value.tape;
+  //     IMAGES.push(tape);
+  //
+  //     const cover = document.createElement('img');
+  //     cover.src = value.cover;
+  //     IMAGES.push(cover);
+  //
+  //     if (value.bg.correct) {
+  //       const correct = document.createElement('img');
+  //       correct.src = value.bg.correct;
+  //       IMAGES.push(correct);
+  //     }
+  //
+  //     if (value.bg.incorrect) {
+  //       const incorrect = document.createElement('img');
+  //       incorrect.src = value.bg.incorrect;
+  //       IMAGES.push(incorrect);
+  //     }
+  //   });
+  // }
 
   _createClass(Special, [{
     key: 'makeOptions',
@@ -929,6 +951,10 @@ var Special = function (_BaseSpecial) {
       this.makeOptions(q.options);
 
       EL.tInner.appendChild(EL.q);
+
+      if (this.activeIndex + 1 < _data2.default.questions.length) {
+        Special.preloadNextImages(this.activeIndex + 1);
+      }
     }
   }, {
     key: 'answer',
@@ -1008,7 +1034,7 @@ var Special = function (_BaseSpecial) {
         this.container.classList.add('is-feed');
       }
 
-      // Special.loadImages();
+      Special.preloadNextImages(this.activeIndex);
       Special.createElements();
 
       this.container.appendChild(EL.main);
@@ -1016,33 +1042,47 @@ var Special = function (_BaseSpecial) {
       Analytics.sendEvent('First screen', 'Show');
     }
   }], [{
-    key: 'loadImages',
-    value: function loadImages() {
-      Object.entries(_data2.default.movies).forEach(function (_ref) {
-        var _ref2 = _slicedToArray(_ref, 2),
-            key = _ref2[0],
-            value = _ref2[1];
+    key: 'preloadNextImages',
+    value: function preloadNextImages(index) {
+      var q = _data2.default.questions[index];
 
-        var tape = document.createElement('img');
-        tape.src = value.tape;
-        IMAGES.push(tape);
+      q.options.forEach(function (option) {
+        var id = option.id;
 
-        var cover = document.createElement('img');
-        cover.src = value.cover;
-        IMAGES.push(cover);
+        if (!IMAGES.hasOwnProperty(id)) {
+          IMAGES[id] = {};
 
-        if (value.bg.correct) {
-          var correct = document.createElement('img');
-          correct.src = value.bg.correct;
-          IMAGES.push(correct);
-        }
+          var movie = _data2.default.movies[id];
 
-        if (value.bg.incorrect) {
-          var incorrect = document.createElement('img');
-          incorrect.src = value.bg.incorrect;
-          IMAGES.push(incorrect);
+          var tape = document.createElement('img');
+          tape.src = movie.tape;
+          IMAGES[id].tape = tape;
+
+          var cover = document.createElement('img');
+          cover.src = movie.cover;
+          IMAGES[id].cover = cover;
+
+          if (movie.coverR) {
+            var coverR = document.createElement('img');
+            coverR.src = movie.coverR;
+            IMAGES[id].coverR = coverR;
+          }
+
+          if (movie.bg.correct) {
+            var correct = document.createElement('img');
+            correct.src = movie.bg.correct;
+            IMAGES[id].correct = correct;
+          }
+
+          if (movie.bg.incorrect) {
+            var incorrect = document.createElement('img');
+            incorrect.src = movie.bg.incorrect;
+            IMAGES[id].incorrect = incorrect;
+          }
         }
       });
+
+      console.log(IMAGES);
     }
   }, {
     key: 'createElements',
