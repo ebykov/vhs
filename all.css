@@ -348,7 +348,6 @@
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
-    background-color: #000;
     background-image: url("https://leonardo.osnova.io/9ccf426b-528a-d151-693c-067bdcb9b81b/") !important;
     background-size: cover;
   }
